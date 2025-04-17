@@ -454,7 +454,7 @@ MonoBehaviour:
   player: {fileID: 233347450}
   initialChunk: {fileID: 4178925449637502813, guid: 291073804f827be42bb96927da8b70d7, type: 3}
   chunkHeight: 5
-  borderThreshold: 2
+  borderThreshold: 4
   maxChunks: 5
   spawnDistance: 9
 --- !u!4 &361233210
