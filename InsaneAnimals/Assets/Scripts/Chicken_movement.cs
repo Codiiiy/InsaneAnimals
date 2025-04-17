@@ -4,31 +4,102 @@ public class ChickenMovement : MonoBehaviour
 {
     [Header("Movement Settings")]
     public float moveSpeed = 5f;
+    public bool isPlaying = true;
+
+    [Header("Jump Settings")]
+    public float jumpDuration = 1f;
+    public float jumpScaleFactor = 1.5f;
+
+    private float jumpTimer = 0f;
+    private float currentJumpDuration;
+    private Vector3 originalScale;
+    private Vector3 targetScale;
+    private bool isJumping = false;
+
+    private float[] railPositions = new float[] { -3.5f, -0.5f, 2.5f };
+    private int currentRail = 1;
+    private Vector3 jumpStartPos;
+    private Vector3 jumpTargetPos;
+    private bool isRailJump = false;
 
     void Update()
     {
-        float moveX = Input.GetAxisRaw("Horizontal");
-        float moveY = Input.GetAxisRaw("Vertical");
-
-        Vector3 movement = new Vector3(moveX, moveY, 0f).normalized;
-        transform.position += movement * moveSpeed * Time.deltaTime;
-
-
-        if (Input.GetKey(KeyCode.UpArrow))
+        if (isPlaying)
         {
-            transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+            transform.position += Vector3.up * moveSpeed * Time.deltaTime;
         }
-        else if (Input.GetKey(KeyCode.RightArrow))
+
+        if (Input.GetKeyDown(KeyCode.LeftArrow) && currentRail > 0 && !isJumping)
         {
-            transform.rotation = Quaternion.Euler(0f, 0f, 270f);
+            currentRail--;
+            StartRailJump();
         }
-        else if (Input.GetKey(KeyCode.DownArrow))
+        else if (Input.GetKeyDown(KeyCode.RightArrow) && currentRail < 2 && !isJumping)
         {
-            transform.rotation = Quaternion.Euler(0f, 0f, 180f);
+            currentRail++;
+            StartRailJump();
         }
-        else if (Input.GetKey(KeyCode.LeftArrow))
+
+        if (Input.GetKeyDown(KeyCode.Space) && !isJumping)
         {
-            transform.rotation = Quaternion.Euler(0f, 0f, 90f);
+            StartJump(jumpDuration, jumpScaleFactor, false);
+        }
+
+        if (isJumping)
+        {
+            AnimateJump();
+        }
+    }
+
+    void StartJump(float duration, float scaleFactor, bool railJump)
+    {
+        originalScale = transform.localScale;
+        targetScale = originalScale * scaleFactor;
+        jumpTimer = 0f;
+        currentJumpDuration = duration;
+        isJumping = true;
+        isRailJump = railJump;
+    }
+
+    void StartRailJump()
+    {
+        jumpStartPos = transform.position;
+        jumpTargetPos = new Vector3(railPositions[currentRail], transform.position.y, transform.position.z);
+        StartJump(jumpDuration * 0.75f, jumpScaleFactor * 0.75f, true);
+    }
+
+    void AnimateJump()
+    {
+        jumpTimer += Time.deltaTime;
+        float t = jumpTimer / currentJumpDuration;
+        float halfDuration = currentJumpDuration / 2f;
+
+        if (isRailJump)
+        {
+            float moveProgress = Mathf.Clamp01(t);
+            Vector3 newPos = Vector3.Lerp(jumpStartPos, jumpTargetPos, moveProgress);
+            transform.position = new Vector3(newPos.x, transform.position.y, transform.position.z);
+        }
+
+        if (jumpTimer < halfDuration)
+        {
+            transform.localScale = Vector3.Lerp(originalScale, targetScale, jumpTimer / halfDuration);
+        }
+        else if (jumpTimer < currentJumpDuration)
+        {
+            transform.localScale = Vector3.Lerp(targetScale, originalScale, (jumpTimer - halfDuration) / halfDuration);
+        }
+        else
+        {
+            transform.localScale = originalScale;
+            if (isRailJump)
+            {
+                transform.position = new Vector3(jumpTargetPos.x, transform.position.y, transform.position.z);
+            }
+
+            jumpTimer = 0f;
+            isJumping = false;
+            isRailJump = false;
         }
     }
 }
