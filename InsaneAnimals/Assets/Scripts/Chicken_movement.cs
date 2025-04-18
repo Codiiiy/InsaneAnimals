@@ -1,11 +1,11 @@
 using TMPro;
 using UnityEngine;
 
-public class ChickenMovement : MonoBehaviour
+public class Chicken_movement : MonoBehaviour
 {
     [Header("Movement Settings")]
     public float moveSpeed = 5f;
-    private bool isPlaying = false;
+    public bool isPlaying = false;
     [Header("Jump Settings")]
     public float jumpDuration = 1f;
     public float jumpScaleFactor = 1.5f;
@@ -24,6 +24,8 @@ public class ChickenMovement : MonoBehaviour
     private float countdown = 3f;
     private bool countdownActive = true;
     private Animator animator;
+
+
 
     void Awake()
     {
