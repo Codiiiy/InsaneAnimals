@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
@@ -8,7 +8,9 @@ public class CameraFollow : MonoBehaviour
 
     [Tooltip("How quickly the camera catches up to the target.")]
     public float smoothTime = 0.3f;
-    public float offsetY = 3f;
+
+    [Tooltip("Offset from the target's position (x, y).")]
+    public Vector2 offset;
 
     private Vector3 velocity = Vector3.zero;
 
@@ -17,9 +19,9 @@ public class CameraFollow : MonoBehaviour
         if (target == null) return;
 
         Vector3 targetPosition = new Vector3(
-            0.5f,                            
-            target.position.y + offsetY,          
-            transform.position.z             
+            target.position.x + offset.x,
+            target.position.y + offset.y,
+            transform.position.z  
         );
 
         transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, smoothTime);
