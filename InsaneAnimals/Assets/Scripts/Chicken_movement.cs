@@ -19,10 +19,6 @@ public class Chicken_movement : MonoBehaviour
     private Vector3 jumpStartPos;
     private Vector3 jumpTargetPos;
     private bool isRailJump = false;
-    public GameObject countdownCanvas;
-    public TMP_Text countdownText;
-    private float countdown = 3f;
-    private bool countdownActive = true;
     private Animator animator;
 
 
@@ -32,27 +28,13 @@ public class Chicken_movement : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-    void Start()
+    /*void Start()
     {
-        countdownCanvas.SetActive(true);
-        countdownText.text = Mathf.CeilToInt(countdown).ToString();
-    }
+
+    }*/
 
     void Update()
     {
-        if (countdownActive)
-        {
-            countdown -= Time.deltaTime;
-            if (countdown > 0)
-                countdownText.text = Mathf.CeilToInt(countdown).ToString();
-            else
-            {
-                countdownText.text = "Go!";
-                countdownActive = false;
-                Invoke(nameof(EndCountdown), 1f);
-            }
-        }
-
         animator.enabled = isPlaying && !isJumping;
 
         if (isPlaying)
@@ -75,12 +57,6 @@ public class Chicken_movement : MonoBehaviour
             if (isJumping)
                 AnimateJump();
         }
-    }
-
-    void EndCountdown()
-    {
-        countdownCanvas.SetActive(false);
-        isPlaying = true;
     }
 
     void StartJump(float duration, float scaleFactor, bool railJump)

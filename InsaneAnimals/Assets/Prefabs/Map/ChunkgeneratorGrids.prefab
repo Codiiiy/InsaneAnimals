@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4531328279298544601}
   - component: {fileID: 8206018725960469050}
   m_Layer: 0
-  m_Name: Scenery_Generator
+  m_Name: Power_up & Scenery_Generator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -163,10 +163,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPrefabs:
-  - {fileID: 3345730693676046618, guid: c87ddcb949da72f44afb187895b1380f, type: 3}
+  - {fileID: 4527235608151837743, guid: 195de21ffdf6bd142a9d4622ae2f6d7d, type: 3}
+  - {fileID: 2801247782484836923, guid: fab0a697ce7214c4b97a56d713fc14f9, type: 3}
+  - {fileID: 8969659431393354054, guid: 3568ac8a5607572428e51b8a7982c0c5, type: 3}
   maxObjects: 3
   minDistance: 4
   emptySpawnChance: 51
+  railX:
+  - -3.5
+  - 0.5
+  - 3
 --- !u!1 &7980186387075021517
 GameObject:
   m_ObjectHideFlags: 0
@@ -8577,6 +8583,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tilemap_Template
       objectReference: {fileID: 0}
+    - target: {fileID: 8703335861815954346, guid: ef1c025dc94df144086bf3eb6cb5f00d, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: d0f7b3111eb170c42ac890557d72baef, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -9,7 +9,7 @@ public class ObjectSpawner : MonoBehaviour
     public float minDistance = 4f;
     [Range(0, 100)] public int emptySpawnChance = 50;
 
-    private float[] railX = new float[] { -3f, 0f, 3f };
+    private float[] railX = new float[] { -3.5f, -0.5f, 2.5f };
     private List<GameObject> activeObjects = new List<GameObject>();
 
     void Start()
