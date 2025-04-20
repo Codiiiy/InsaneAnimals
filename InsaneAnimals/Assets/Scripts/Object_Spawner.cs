@@ -48,4 +48,12 @@ public class ObjectSpawner : MonoBehaviour
         GameObject newObj = Instantiate(prefabToSpawn, spawnPos, Quaternion.identity);
         activeObjects.Add(newObj);
     }
+    void OnDestroy()
+    {
+        foreach (GameObject obj in activeObjects)
+        {
+            if (obj != null)
+                Destroy(obj);
+        }
+    }
 }

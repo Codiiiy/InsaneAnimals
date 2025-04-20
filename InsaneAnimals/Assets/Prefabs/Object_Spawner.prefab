@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &291111187538035735
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6747773124183460513}
+  - component: {fileID: 7531408900838215429}
+  m_Layer: 0
+  m_Name: Object_Spawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6747773124183460513
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 291111187538035735}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.1883131, y: 1.5436392, z: -0.052795324}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7531408900838215429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 291111187538035735}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45b29f9e7bea50948a870086a1f44894, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnPrefabs:
+  - {fileID: 2801247782484836923, guid: fab0a697ce7214c4b97a56d713fc14f9, type: 3}
+  - {fileID: 4527235608151837743, guid: 195de21ffdf6bd142a9d4622ae2f6d7d, type: 3}
+  - {fileID: 8969659431393354054, guid: 3568ac8a5607572428e51b8a7982c0c5, type: 3}
+  - {fileID: 69873267848743777, guid: 2b2b1d12adbb775449cc355970558d17, type: 3}
+  - {fileID: 6173347275548468166, guid: 1729c16e83fd5694fb4e033ada68010e, type: 3}
+  - {fileID: 2080888745360917157, guid: 1900fb56ed434f04b891f971b1edfa16, type: 3}
+  - {fileID: 5647717992504419927, guid: 2ef6daf6b1f2f7f43b63df7d702bd1c2, type: 3}
+  - {fileID: 2080888745360917157, guid: 1900fb56ed434f04b891f971b1edfa16, type: 3}
+  - {fileID: 6173347275548468166, guid: 1729c16e83fd5694fb4e033ada68010e, type: 3}
+  - {fileID: 69873267848743777, guid: 2b2b1d12adbb775449cc355970558d17, type: 3}
+  maxObjects: 3
+  minDistance: 4
+  emptySpawnChance: 28

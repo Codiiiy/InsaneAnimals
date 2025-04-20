@@ -5,6 +5,12 @@ TagManager:
   serializedVersion: 3
   tags:
   - InitialChunk
+  - PowerUp_DoublePoints
+  - PowerUp_SlowTime
+  - Obstacle
+  - Seed
+  - 1life
+  - EndTrigger
   layers:
   - Default
   - TransparentFX
