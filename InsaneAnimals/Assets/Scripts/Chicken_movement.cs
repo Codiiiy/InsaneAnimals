@@ -13,13 +13,14 @@ public class Chicken_movement : MonoBehaviour
     private float currentJumpDuration;
     private Vector3 originalScale;
     private Vector3 targetScale;
-    private bool isJumping = false;
-    private float[] railPositions = new float[] { -3.5f, -0.5f, 2.5f };
+    public bool isJumping = false;
+    private float[] railPositions = new float[] { -3f, 0f, 3f };
     private int currentRail = 1;
     private Vector3 jumpStartPos;
     private Vector3 jumpTargetPos;
-    private bool isRailJump = false;
+    public bool isRailJump = false;
     private Animator animator;
+
 
 
 
@@ -36,7 +37,6 @@ public class Chicken_movement : MonoBehaviour
     void Update()
     {
         animator.enabled = isPlaying && !isJumping;
-
         if (isPlaying)
         {
             transform.position += Vector3.up * moveSpeed * Time.deltaTime;
@@ -65,8 +65,9 @@ public class Chicken_movement : MonoBehaviour
         targetScale = originalScale * scaleFactor;
         jumpTimer = 0f;
         currentJumpDuration = duration;
-        isJumping = true;
         isRailJump = railJump;
+        isJumping = true;
+
     }
 
     void StartRailJump()
@@ -102,6 +103,7 @@ public class Chicken_movement : MonoBehaviour
             jumpTimer = 0f;
             isJumping = false;
             isRailJump = false;
+            
         }
     }
 }

@@ -3,39 +3,40 @@ using System.Collections.Generic;
 
 public class ChunkGenerator : MonoBehaviour
 {
-    [Header("References")]
     public List<GameObject> chunkPrefabs = new List<GameObject>();
     public Transform player;
     public GameObject initialChunk;
+    public GameObject endChunk;
 
-    [Header("Chunk Settings")]
     public float chunkHeight = 5f;
     public float borderThreshold = 2f;
     public int maxChunks = 5;
     public float spawnDistance = 10f;
-    [Tooltip("How many chunks ahead to generate when the player nears the edge.")]
     public int chunksAhead = 1;
+    public int BiomeLength = 3;
+    public int maxBiomeLength = 5;
 
     private Queue<GameObject> activeChunks = new Queue<GameObject>();
+    private GameObject currentBiomePrefab;
+    private int currentBiomeCount = 0;
+    private bool spawnEndChunkNext = false;
+    private bool endChunkSpawned = false;
 
     void Start()
     {
-        if (chunkPrefabs == null || chunkPrefabs.Count == 0)
-        {
-            Debug.LogError("No chunk prefabs assigned in the Inspector!");
-            return;
-        }
-        if (initialChunk == null)
-        {
-            Debug.LogError("Initial chunk prefab is not assigned in the Inspector!");
-            return;
-        }
+        if (chunkPrefabs == null || chunkPrefabs.Count == 0) return;
+        if (initialChunk == null) return;
+
         GameObject firstChunk = Instantiate(initialChunk, Vector3.zero, Quaternion.identity);
         activeChunks.Enqueue(firstChunk);
+        currentBiomePrefab = chunkPrefabs[Random.Range(0, chunkPrefabs.Count)];
+        currentBiomeCount = 1;
     }
 
     void Update()
     {
+        if (endChunkSpawned) return;
+
         GameObject currentChunk = GetCurrentChunk();
         if (currentChunk == null) return;
 
@@ -57,14 +58,51 @@ public class ChunkGenerator : MonoBehaviour
 
     private void SpawnChunk(Vector3 spawnPosition)
     {
-        GameObject prefabToSpawn = chunkPrefabs[Random.Range(0, chunkPrefabs.Count)];
-        GameObject newChunk = Instantiate(prefabToSpawn, spawnPosition, Quaternion.identity);
+        GameObject chunkToSpawn;
+
+        if (spawnEndChunkNext && endChunk != null)
+        {
+            chunkToSpawn = endChunk;
+            spawnEndChunkNext = false;
+            endChunkSpawned = true;
+        }
+        else
+        {
+            if (currentBiomePrefab == null || currentBiomeCount >= maxBiomeLength)
+            {
+                currentBiomeCount = 0;
+                currentBiomePrefab = GetRandomBiomeDifferentFrom(currentBiomePrefab);
+            }
+
+            if (currentBiomeCount >= BiomeLength)
+            {
+                currentBiomePrefab = GetRandomBiomeDifferentFrom(currentBiomePrefab);
+                currentBiomeCount = 0;
+            }
+
+            chunkToSpawn = currentBiomePrefab;
+            currentBiomeCount++;
+        }
+
+        GameObject newChunk = Instantiate(chunkToSpawn, spawnPosition, Quaternion.identity);
         activeChunks.Enqueue(newChunk);
+
         if (activeChunks.Count > maxChunks)
         {
             GameObject oldChunk = activeChunks.Dequeue();
             if (oldChunk != null) Destroy(oldChunk);
         }
+    }
+
+    private GameObject GetRandomBiomeDifferentFrom(GameObject current)
+    {
+        if (chunkPrefabs.Count <= 1) return chunkPrefabs[0];
+        GameObject next;
+        do
+        {
+            next = chunkPrefabs[Random.Range(0, chunkPrefabs.Count)];
+        } while (next == current);
+        return next;
     }
 
     private bool ChunkExistsAt(Vector3 position)
@@ -92,5 +130,10 @@ public class ChunkGenerator : MonoBehaviour
             }
         }
         return closest;
+    }
+
+    public void TriggerEndChunk()
+    {
+        spawnEndChunkNext = true;
     }
 }

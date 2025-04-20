@@ -6,10 +6,16 @@ public class Game_Manager : MonoBehaviour
     public static Game_Manager instance;
     public Chicken_movement chicken;
     public TMP_Text score_text;
+    public TMP_Text FinalScore;
+    public GameObject ScoreCanvas;
+     public ChunkGenerator ChunkGenerator;
+    public GameObject EndCanvas;
+    private bool triggeredEnd = false;
 
     [Header("Distance Scoring")]
     private bool distanceScoring = false;
-    public float distancePoints = 10;
+    public float ScoreAdjustment = 5;
+    private int scoreCounter = 0;
 
     [Header("Double Points Power‑Up")]
     public float doublePointsDuration = 5f;
@@ -25,11 +31,14 @@ public class Game_Manager : MonoBehaviour
     public int penalty = 1000;
 
     int score = 0;
+    public int targetScore = 30000;
 
     public GameObject countdownCanvas;
     public TMP_Text countdownText;
     private float countdown = 3f;
     private bool countdownActive = true;
+
+    public int lives = 2;
 
     private void Awake()
     {
@@ -39,6 +48,7 @@ public class Game_Manager : MonoBehaviour
 
     void Start()
     {
+        EndCanvas.SetActive(false);
         countdownCanvas.SetActive(true);
         countdownText.text = Mathf.CeilToInt(countdown).ToString();
         UpdateScoreText();
@@ -46,6 +56,15 @@ public class Game_Manager : MonoBehaviour
 
     void Update()
     {
+        if(lives == 0)
+        {
+            Loss();
+            return;
+        }
+        if(score >= targetScore)
+        {
+            Win();
+        }
         if (countdownActive)
         {
             countdown -= Time.deltaTime;
@@ -58,12 +77,18 @@ public class Game_Manager : MonoBehaviour
                 Invoke(nameof(EndCountdown), 1f);
             }
         }
-        if (distanceScoring)
+
+        if (scoreCounter == ScoreAdjustment)
         {
-            int amt = doublePointsActive ? 2 : 1;
-            score += amt;
-            UpdateScoreText();
+            if (distanceScoring)
+            {
+                int amt = doublePointsActive ? 2 : 1;
+                score += amt;
+                UpdateScoreText();
+            }
+            scoreCounter = 0;
         }
+        scoreCounter++;
 
         if (doublePointsActive)
         {
@@ -129,6 +154,43 @@ public class Game_Manager : MonoBehaviour
         countdownCanvas.SetActive(false);
         distanceScoring = true;
         chicken.isPlaying = true;
+    }
+    public void ObstacleCollision()
+    {
+        lives -= 1;
+    }
+    public void LifeUp()
+    {
+        if (lives != 2)
+        {
+            lives = 2;
+        }
+    }
+    private void Loss()
+    {
+        End();
+        FinalScore.text = $"You Lost! Final Score: {score} Points";
+
+    }
+    private void Win()
+    {
+        if(!triggeredEnd)
+        {
+            ChunkGenerator.TriggerEndChunk();
+            triggeredEnd = true;
+        }
+        FinalScore.text = $"You Won! Final Score: {score} Points";
+        if (chicken.moveSpeed == 0)
+        {
+            End();
+        }
+    }
+    private void End()
+    {
+        distanceScoring = false;
+        chicken.isPlaying = false;
+        EndCanvas.SetActive(true);
+        ScoreCanvas.SetActive(false);
     }
 }
 

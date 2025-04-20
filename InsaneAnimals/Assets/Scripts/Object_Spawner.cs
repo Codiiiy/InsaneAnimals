@@ -9,7 +9,7 @@ public class ObjectSpawner : MonoBehaviour
     public float minDistance = 4f;
     [Range(0, 100)] public int emptySpawnChance = 50;
 
-    private float[] railX = new float[] { -3.5f, -0.5f, 2.5f };
+    private float[] railX = new float[] { -3f, 0f, 3f };
     private List<GameObject> activeObjects = new List<GameObject>();
 
     void Start()
@@ -47,5 +47,13 @@ public class ObjectSpawner : MonoBehaviour
 
         GameObject newObj = Instantiate(prefabToSpawn, spawnPos, Quaternion.identity);
         activeObjects.Add(newObj);
+    }
+    void OnDestroy()
+    {
+        foreach (GameObject obj in activeObjects)
+        {
+            if (obj != null)
+                Destroy(obj);
+        }
     }
 }
