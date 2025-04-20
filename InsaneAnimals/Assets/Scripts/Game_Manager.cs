@@ -27,8 +27,8 @@ public class Game_Manager : MonoBehaviour
     private bool slowTimeActive = false;
     private float slowTimeTimer = 0f;
 
-    [Header("Obstacle Penalty")]
-    public int penalty = 1000;
+  //  [Header("Obstacle Penalty")]
+  //  public int penalty = 1000;
 
     int score = 0;
     public int targetScore = 30000;
@@ -111,13 +111,13 @@ public class Game_Manager : MonoBehaviour
         UpdateScoreText();
     }
 
-    public void DeductPoints()
+ /*   public void DeductPoints()
     {
         score -= penalty;
         if (score < 0) score = 0;
         UpdateScoreText();
     }
-
+ */
     private void UpdateScoreText()
     {
         score_text.text = $"{score} Points";
