@@ -129,6 +129,19 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -409,7 +422,19 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Simpl-Veggies-Free-Sample-32x32_0: -1933246201863627453
+      Simpl-Veggies-Free-Sample-32x32_1: -3028087205146681733
+      Simpl-Veggies-Free-Sample-32x32_10: -6420356466672451949
+      Simpl-Veggies-Free-Sample-32x32_11: 4703835187007457329
+      Simpl-Veggies-Free-Sample-32x32_2: 1279913419492902406
+      Simpl-Veggies-Free-Sample-32x32_3: 2589928522737680493
+      Simpl-Veggies-Free-Sample-32x32_4: -44703027698175041
+      Simpl-Veggies-Free-Sample-32x32_5: 7886753449187153928
+      Simpl-Veggies-Free-Sample-32x32_6: -5507894556435295679
+      Simpl-Veggies-Free-Sample-32x32_7: -4204630023975090815
+      Simpl-Veggies-Free-Sample-32x32_8: 1271686804803940834
+      Simpl-Veggies-Free-Sample-32x32_9: 7792763435837860505
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
