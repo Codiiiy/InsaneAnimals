@@ -10,6 +10,11 @@ public class Wolf_Chase : MonoBehaviour
     public float catchUpDistance = 0.5f;
     private bool catchingUp = false;
     private bool noLives = false;
+    [SerializeField] private AudioClip growlClip;
+    [SerializeField] private AudioClip biteClip;
+    [SerializeField] private AudioClip howlClip;
+
+
 
     void Update()
     {
@@ -22,7 +27,7 @@ public class Wolf_Chase : MonoBehaviour
                 Mathf.MoveTowards(transform.position.y, target.transform.position.y, followSpeed * Time.deltaTime),
                 transform.position.z
             );
-
+            SoundFXManager.instance.PlaySoundFXClip(biteClip, transform, 1f);
             gameObject.layer = 10;
             
         }
@@ -35,6 +40,8 @@ public class Wolf_Chase : MonoBehaviour
                 Mathf.MoveTowards(transform.position.y, targetX, followSpeed * Time.deltaTime),
                 transform.position.z
             );
+            SoundFXManager.instance.PlaySoundFXClip(growlClip, transform, 1f);
+
             if (transform.position.y != targetX)
             {
                 followSpeed += 1;
@@ -48,6 +55,7 @@ public class Wolf_Chase : MonoBehaviour
                 Mathf.MoveTowards(transform.position.y, targetX, followSpeed * Time.deltaTime),
                 transform.position.z
             );
+            SoundFXManager.instance.PlaySoundFXClip(howlClip, transform, 1f);
         }
     }
 

@@ -1,2 +1,17 @@
 fileFormatVersion: 2
 guid: 1dcabf4bb46b73e43ad33d716bd41f4b
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - chicken: {instanceID: 0}
+  - chaser: {instanceID: 0}
+  - crunch2Clip: {fileID: 8300000, guid: d1642c179293dea41ae9047f381146be, type: 3}
+  - slowtimeClip: {fileID: 8300000, guid: 7e3897ce594eb244da0a8bab2751ddb5, type: 3}
+  - crunchClip: {fileID: 8300000, guid: 674c27233e8063d4ebfa6349dc6b7c80, type: 3}
+  - deathClip: {fileID: 8300000, guid: 13145d9c07891a747a2a353100a19070, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

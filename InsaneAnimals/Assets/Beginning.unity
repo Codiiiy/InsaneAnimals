@@ -271,7 +271,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 233347450}
   smoothTime: 0.3
-  offset: {x: 0, y: 0}
+  offsetY: 3
 --- !u!1 &233347447
 GameObject:
   m_ObjectHideFlags: 0
@@ -284,6 +284,7 @@ GameObject:
   - component: {fileID: 233347449}
   - component: {fileID: 233347448}
   - component: {fileID: 233347451}
+  - component: {fileID: 233347452}
   m_Layer: 0
   m_Name: chicken_0
   m_TagString: Untagged
@@ -321,20 +322,20 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
+  m_IsTrigger: 1
+  m_UsedByEffector: 1
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: -0.016647011, y: -0.039512634}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 1, y: 0.9375}
     newSize: {x: 0.16, y: 0.16}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
-  m_AutoTiling: 0
+  m_AutoTiling: 1
   m_Size: {x: 0.84687203, y: 0.96167827}
   m_EdgeRadius: 0
 --- !u!212 &233347449
@@ -380,7 +381,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: -471329714, guid: 0ec813ade4374d34b92ba069365a43ed, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -423,6 +424,30 @@ MonoBehaviour:
   isPlaying: 1
   jumpDuration: 1
   jumpScaleFactor: 1.5
+  isJumping: 0
+  isRailJump: 0
+--- !u!95 &233347452
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 233347447}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 745f6e156aabe9440b901ba199532bd3, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 1
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 1
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &361233208
 GameObject:
   m_ObjectHideFlags: 0
@@ -456,10 +481,14 @@ MonoBehaviour:
   - {fileID: 7980186387075021517, guid: e40d9ad5050069b4f83bba2e470bddb9, type: 3}
   player: {fileID: 233347450}
   initialChunk: {fileID: 4178925449637502813, guid: 291073804f827be42bb96927da8b70d7, type: 3}
+  endChunk: {fileID: 0}
   chunkHeight: 5
   borderThreshold: 4
   maxChunks: 5
   spawnDistance: 9
+  chunksAhead: 1
+  BiomeLength: 3
+  maxBiomeLength: 5
 --- !u!4 &361233210
 Transform:
   m_ObjectHideFlags: 0
